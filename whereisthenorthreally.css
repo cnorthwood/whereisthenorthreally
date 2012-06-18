@@ -1,0 +1,24 @@
+#placename {
+    font-size: xx-large;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em;
+}
+
+#map {
+    height: 450px;
+}
+
+#loading-form {
+    margin-top: 130px;
+    margin-bottom: 130px;
+    padding-top: 50px;
+    text-align: center;
+    background-image: url('loading.gif');
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.btn {
+    margin-top: 1em;
+}
