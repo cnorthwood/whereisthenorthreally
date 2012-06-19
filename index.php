@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+    $token = md5(uniqid(rand(), true));
+    setcookie('whereisthenorthcsrftoken', $token);
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -16,6 +19,9 @@
         <link rel="stylesheet" href="leaflet/leaflet.ie.css" />
     <![endif]-->
     <link rel="stylesheet" href="whereisthenorthreally.css" />
+    <script type="text/javascript">
+        csrftoken = <?php echo json_encode($token); ?>;
+    </script>
 </head>
 
 <body>
@@ -26,7 +32,12 @@
         </div>
 
         <div class="row">
-            <div class="span6" id="map"></div>
+            <div class="alert">
+                <h2>Privacy Policy</h2>
+                <button class="close" data-dismiss="alert">I'm okay with this</button>
+                This site uses cookies as a security measure to prevent false submissions and records only your IP address to prevent against spam, and your postcode (if given) and choices for the purposes of analysing the data to determine where people perceive boundaries in England to lay.
+           </div>
+            <div class="span6 hidden-phone" id="map"></div>
             <div class="span6">
                 <div class="alert" style="display: none;" id="results-message"></div>
                 <div class="hero-unit">
@@ -58,6 +69,10 @@
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <p>The software powering the site was written by <a href="http://www.pling.org.uk/">Chris Northwood</a> and is released <a href="https://github.com/cnorthwood/whereisthenorthreally">on Github</a> under <a href="https://github.com/cnorthwood/whereisthenorthreally/blob/master/LICENSE">the BSD license</a>.</p>
+            <p>The locations are powered by <a href="http://www.geonames.org/">Geonames</a> under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.</p>
+        </footer>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <script src="leaflet/leaflet.js" type="text/javascript"></script>

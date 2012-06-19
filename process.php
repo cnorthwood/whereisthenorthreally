@@ -5,28 +5,41 @@ ini_set('display_errors', 'true');
 
 require('config.inc.php');
 
+function verifyCsrf() {
+    return !empty($_COOKIE['whereisthenorthcsrftoken']) && !empty($_POST['csrftoken']) && ($_COOKIE['whereisthenorthcsrftoken'] == $_POST['csrftoken']);
+}
+
 class WhereIsTheNorthReporter {
     function __construct() {
         $this->db = new mysqli(null, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
     }
     
     public function getRandomLocation() {
+        $query = $this->db->prepare("SELECT placeId,name,lat,lon FROM places ORDER BY RAND() LIMIT 1;");
+        $query->execute();
+        $query->bind_result($placeId, $name, $lat, $lon);
+        $query->fetch();
         return array(
-            'id' => 1,
-            'name' => 'Doncaster',
-            'lat' => 53.516,
-            'lng' => -1.133
+            'id' => $placeId,
+            'name' => $name,
+            'lat' => $lat,
+            'lon' => $lon
         );
     }
     
     public function getPlaceNameFromId($id) {
-        return 'Doncaster';
+        $query = $this->db->prepare("SELECT name FROM places WHERE placeId=?");
+        $query->bind_param('i', $id);
+        $query->execute();
+        $query->bind_result($name);
+        $query->fetch();
+        return $name;
     }
     
     public function saveSubmission($placeId, $choice, $postcode) {
-        $query = $this->db->prepare("INSERT INTO results(placeId,choice,postcode) VALUES(?,?,?)");
+        $query = $this->db->prepare("INSERT INTO results(placeId,choice,postcode,ip) VALUES(?,?,?,?)");
         if ($query === false) { die($this->db->error); }
-        $query->bind_param('iss', $placeId, $choice, $postcode);
+        $query->bind_param('isss', $placeId, $choice, $postcode, $_SERVER['REMOTE_ADDR']);
         $query->execute();
     }
     
@@ -38,9 +51,7 @@ class WhereIsTheNorthReporter {
             if (!empty($placeId)) {
                 $placeName = $this->getPlaceNameFromId($placeId);
                 if (!empty($placeName)) {
-                    if ($choice != 'dunno') {
-                        $this->saveSubmission($placeId, $choice, $_POST['postcode']);
-                    }
+                    $this->saveSubmission($placeId, $choice, $_POST['postcode']);
                     $response['lastLocation'] = $placeName;
                     $response['lastSubmission'] = $choice;
                 }
@@ -67,7 +78,14 @@ class WhereIsTheNorthReporter {
 
 $whereIsTheNorth = new WhereIsTheNorthReporter();
 $response = $whereIsTheNorth->getRandomLocation();
-$response = array_merge($response, $whereIsTheNorth->safeSaveSubmissionFromPost());
+if (isset($_POST['placeId'])) {
+    if (verifyCsrf()) {
+        $response = array_merge($response, $whereIsTheNorth->safeSaveSubmissionFromPost());
+    } else {
+        die('CSRF failure');
+    }
+}
 
 header('Content-type: application/json');
+header("Cache-Control: no-cache, must-revalidate");
 echo json_encode($response);

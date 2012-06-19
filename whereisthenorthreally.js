@@ -25,7 +25,7 @@ function WhereIsTheNorthReally() {
     function updateLocation(data) {
         $('#loading-form').hide();
         $('#submission-form').show();
-        var newLocation = new L.LatLng(data.lat, data.lng);
+        var newLocation = new L.LatLng(data.lat, data.lon);
         
         if (marker !== null) {
             map.removeLayer(marker);
@@ -70,7 +70,8 @@ function WhereIsTheNorthReally() {
             data: {
                 placeId: placeId,
                 postcode: $('#postcode').val(),
-                choice: choice
+                choice: choice,
+                csrftoken: csrftoken
             },
             success: updateLocation,
             error: function() {
