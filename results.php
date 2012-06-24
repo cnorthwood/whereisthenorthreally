@@ -39,6 +39,8 @@
                     </thead>
                     <tbody>
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'true');
 require 'config.inc.php';
 $db = new mysqli(null, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $query = $db->prepare("SELECT places.name, places.lat, places.lon, results.choice, count(*) FROM places,results WHERE places.placeId = results.placeId GROUP BY places.name,results.choice");
@@ -50,7 +52,11 @@ while ($query->fetch()) {
     if (!array_key_exists($name, $results)) {
         $results[$name] = array(
             'lat' => $lat,
-            'lon' => $lon
+            'lon' => $lon,
+            'north' => 0,
+            'midlands' => 0,
+            'south' => 0,
+            'dunno' => 0
         );
     }
     $results[$name][$choice] = $count;
