@@ -27,6 +27,7 @@
 <body>
     <div class="container">
         <div class="page-header">
+            <blockquote class="pull-right"><a href="results.php">Some initial results are now available</a></blockquote>
             <h1>So where's the North, really? <small>And what exactly is the Midlands?</small></h1>
             <p>A crowd-sourcing experiment to see where people think the geographic boundaries of England lay</p>
         </div>
