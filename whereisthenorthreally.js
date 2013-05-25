@@ -91,7 +91,9 @@ function WhereIsTheNorthReally() {
         $("#results-message").addClass("alert-" + message_class);
         $("#results-message").text(message);
         $("#results-message").show();
-        $('.quizresults tbody').append('<tr><td>' + data.lastLocation + '</td><td>' + data.lastSubmission + '</td><td>' + Math.round(parseFloat(data.agreement) * 100) + '% of people agree with you</td></tr>');
+        if (data.lastSubmission != 'dunno') {
+            $('.quizresults tbody').append('<tr><td>' + data.lastLocation + '</td><td>' + data.lastSubmission + '</td><td>' + Math.round(parseFloat(data.agreement) * 100) + '% of people agree with you</td></tr>');
+        }
         if (submissions % 10 == 0) {
             $('.quizbody').hide();
             $('.quizresults').fadeIn();
