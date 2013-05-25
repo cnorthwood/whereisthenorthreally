@@ -22,3 +22,7 @@
 .btn {
     margin-top: 1em;
 }
+
+.quizresults {
+    display: none;
+}

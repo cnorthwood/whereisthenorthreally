@@ -38,8 +38,8 @@
                 <button class="close" data-dismiss="alert">I'm okay with this</button>
                 This site uses cookies as a security measure to prevent false submissions and records only your IP address to prevent against spam, and your postcode (if given) and choices for the purposes of analysing the data to determine where people perceive boundaries in England to lay.
            </div>
-            <div class="span6 hidden-phone" id="map"></div>
-            <div class="span6">
+            <div class="span6 hidden-phone quizbody" id="map"></div>
+            <div class="span6 quizbody">
                 <div class="alert" style="display: none;" id="results-message"></div>
                 <div class="hero-unit">
                     <div id="submission-form" style="display: none;">
@@ -70,6 +70,24 @@
                 </div>
             </div>
         </div>
+
+		<div class="row quizresults">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Place</th>
+						<th colspan="2">Your Answer</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+			<fieldset style="text-align:center">
+				<div class="control-group">
+					<button class="btn-primary btn-large" type="submit" id="continuequiz">Locate 10 more places</button>
+				</div>
+			</fieldset>
+		</div>
+
         <footer class="footer">
             <p>The software powering the site was written by <a href="http://www.pling.org.uk/">Chris Northwood</a> and is released <a href="https://github.com/cnorthwood/whereisthenorthreally">on Github</a> under <a href="https://github.com/cnorthwood/whereisthenorthreally/blob/master/LICENSE">the BSD license</a>.</p>
             <p>The locations are powered by <a href="http://www.geonames.org/">Geonames</a> under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.</p>

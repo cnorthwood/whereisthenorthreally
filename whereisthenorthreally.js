@@ -2,7 +2,7 @@ $(WhereIsTheNorthReally);
 
 function WhereIsTheNorthReally() {
 
-    var last_results = [];
+    var submissions = 0;
     
     var map = new L.Map('map', {
         minZoom: 6,
@@ -59,8 +59,8 @@ function WhereIsTheNorthReally() {
                     var message_class = "info";
                     break;
             }
-            showResults(message_class, message, data.agreement);
-            last_results.push({place: data.lastLocation, choice: data.lastSubmission, agreement: data.agreement});
+            showResults(message_class, message, data);
+            submissions++;
         }
     }
     
@@ -86,11 +86,16 @@ function WhereIsTheNorthReally() {
         });
     }
     
-    function showResults(message_class, message) {
-        $("#results-message").removeClass("alert-success alert-info alert-error")
+    function showResults(message_class, message, data) {
+        $("#results-message").removeClass("alert-success alert-info alert-error");
         $("#results-message").addClass("alert-" + message_class);
         $("#results-message").text(message);
         $("#results-message").show();
+        $('.quizresults tbody').append('<tr><td>' + data.lastLocation + '</td><td>' + data.lastSubmission + '</td><td>' + Math.round(parseFloat(data.agreement) * 100) + '% of people agree with you</td></tr>');
+        if (submissions % 10 == 0) {
+            $('.quizbody').hide();
+            $('.quizresults').fadeIn();
+        }
     }
     
     $('#north').click(function(e){
@@ -108,6 +113,13 @@ function WhereIsTheNorthReally() {
     $('#dunno').click(function(e){
         e.preventDefault();
         submit("dunno");
+    });
+    $('#continuequiz').click(function(e){
+        e.preventDefault();
+        $('.quizresults').fadeOut(function() {
+            $('.quizbody').show();
+            $('.quizresults tbody').empty();
+        });
     });
     
     $.ajax({
