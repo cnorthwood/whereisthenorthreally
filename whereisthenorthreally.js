@@ -59,8 +59,8 @@ function WhereIsTheNorthReally() {
                     var message_class = "info";
                     break;
             }
-            showResults(message_class, message, data);
             submissions++;
+            showResults(message_class, message, data);
         }
     }
     
