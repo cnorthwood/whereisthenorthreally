@@ -42,6 +42,15 @@ class WhereIsTheNorthReporter {
         $query->bind_param('isss', $placeId, $choice, $postcode, $_SERVER['REMOTE_ADDR']);
         $query->execute();
     }
+
+	public function getAgreement($placeId, $choice) {
+		$query = $this->db->prepare("SELECT (SELECT COUNT(*) FROM results WHERE `placeId`=? AND choice=?) / count(*) FROM results WHERE `placeId`=?;");
+		$query->bind_param('isi', $placeId, $choice, $placeId);
+		$query->execute();
+		$query->bind_result($agreement);
+		$query->fetch();
+		return $agreement;
+	}
     
     public function safeSaveSubmissionFromPost() {
         $response = array();
@@ -54,6 +63,7 @@ class WhereIsTheNorthReporter {
                     $this->saveSubmission($placeId, $choice, $_POST['postcode']);
                     $response['lastLocation'] = $placeName;
                     $response['lastSubmission'] = $choice;
+					$response['agreement'] = $this->getAgreement($placeId, $choice);
                 }
             }
         }

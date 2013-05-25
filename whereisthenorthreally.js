@@ -1,6 +1,8 @@
 $(WhereIsTheNorthReally);
 
 function WhereIsTheNorthReally() {
+
+    var last_results = [];
     
     var map = new L.Map('map', {
         minZoom: 6,
@@ -30,7 +32,7 @@ function WhereIsTheNorthReally() {
         if (marker !== null) {
             map.removeLayer(marker);
         }
-        marker = new L.Marker(newLocation)
+        marker = new L.Marker(newLocation);
         map.addLayer(marker);
         map.panTo(newLocation);
         map.setZoom(8);
@@ -57,7 +59,8 @@ function WhereIsTheNorthReally() {
                     var message_class = "info";
                     break;
             }
-            showResults(message_class, message);
+            showResults(message_class, message, data.agreement);
+            last_results.push({place: data.lastLocation, choice: data.lastSubmission, agreement: data.agreement});
         }
     }
     
