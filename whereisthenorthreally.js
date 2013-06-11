@@ -164,8 +164,9 @@ function WhereIsTheNorthReally() {
     $('.map-switch').on('switch-change', function() {
         $('.quizbody').toggleClass('span12');
         $('.quizbody').toggleClass('span6');
-        $('#map').toggle();
-        map.invalidateSize();
+        $('#map').toggle(function() {
+            map.invalidateSize();
+        });
     });
     
     $.ajax({

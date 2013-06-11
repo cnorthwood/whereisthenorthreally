@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label" for="map-toggle">Show/hide map</label>
+                                    <label class="control-label" for="map-toggle">Map</label>
 									<div class="switch map-switch hidden-phone">
 										<input type="checkbox" id="map-toggle">
 									</div>
