@@ -39,10 +39,10 @@
                 <button class="close" data-dismiss="alert">I'm okay with this</button>
                 This site uses cookies as a security measure to prevent false submissions and records only your IP address to prevent against spam, and your postcode (if given) and choices for the purposes of analysing the data to determine where people perceive boundaries in England to lay.
            </div>
-            <div class="span12 hidden-phone quizbody" id="map">
+            <div class="span6 hidden-phone quizbody" id="map">
 				<div id="map"></div>
             </div>
-            <div class="span12 quizbody">
+            <div class="span12 quizbody quizquestion">
                 <div class="alert" style="display: none;" id="results-message"></div>
                 <div class="hero-unit">
                     <div id="submission-form" style="display: none;">
