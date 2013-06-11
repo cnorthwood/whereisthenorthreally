@@ -79,10 +79,9 @@
         </div>
 
 
-		<div class="row quizresults" id="results-map"></div>
-
 		<div class="row quizresults">
-			<table class="table">
+			<div class="span6" id="results-map"></div>
+			<table class="table span6">
 				<thead>
 					<tr>
 						<th>Place</th>
