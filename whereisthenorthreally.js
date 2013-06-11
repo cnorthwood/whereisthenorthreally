@@ -19,6 +19,17 @@ function WhereIsTheNorthReally() {
     });
     map.addLayer(mapTiles);
     map.setView(new L.LatLng(52, -1), 6);
+
+    var resultsMap = new L.Map('results-map', {
+        minZoom: 6
+    });
+    var resultsMapTiles = new L.TileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+        attribution: 'Data, imagery and map information provided by MapQuest, <a href="http://openstreetmap.org/">Open Street Map</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxZoom: 18
+    });
+    resultsMap.addLayer(resultsMapTiles);
+    resultsMap.setView(new L.LatLng(52.7, -1), 6);
+    var resultsMarkers = [];
     
     var placeId = null;
     var marker = null;
@@ -65,6 +76,26 @@ function WhereIsTheNorthReally() {
     }
     
     function submit(choice) {
+        var colour;
+        switch (choice) {
+            case "south":
+                colour = '#0000cc';
+                break;
+            case "midlands":
+                colour = '#00cc00';
+                break;
+            case "north":
+                colour = '#cc0000';
+                break;
+            case "dunno":
+                colour = '#999999';
+                break;
+        }
+
+        var resultsMarker = new L.CircleMarker(marker.getLatLng(), {fillColor: colour});
+        resultsMap.addLayer(resultsMarker);
+        resultsMarkers.push(resultsMarker);
+
         $('#submission-form').hide();
         $('#loading-form').show();
         $.ajax({
@@ -94,6 +125,7 @@ function WhereIsTheNorthReally() {
         if (data.lastSubmission != 'dunno') {
             $('.quizresults tbody').append('<tr><td>' + data.lastLocation + '</td><td>' + data.lastSubmission + '</td><td>' + Math.round(parseFloat(data.agreement) * 100) + '% of people agree with you</td></tr>');
         }
+
         if (submissions % 10 == 0) {
             $('.quizbody').hide();
             $('.quizresults').fadeIn();
@@ -122,7 +154,12 @@ function WhereIsTheNorthReally() {
             $('.quizbody').show();
             $('.quizresults tbody').empty();
         });
+        for (var i = 0; i < resultsMarkers.length; ++i) {
+            resultsMap.removeLayer(resultsMarkers[i]);
+        }
     });
+
+    $('.map-switch').on('switch-change', function() { $('#map').toggle(); });
     
     $.ajax({
         type: "GET",

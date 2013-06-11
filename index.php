@@ -11,6 +11,7 @@
     <meta name="author" content="">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/bootstrapSwitch.css" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -38,7 +39,12 @@
                 <button class="close" data-dismiss="alert">I'm okay with this</button>
                 This site uses cookies as a security measure to prevent false submissions and records only your IP address to prevent against spam, and your postcode (if given) and choices for the purposes of analysing the data to determine where people perceive boundaries in England to lay.
            </div>
-            <div class="span6 hidden-phone quizbody" id="map"></div>
+            <div class="span6 hidden-phone quizbody">
+				<div id="map"></div>
+				<div class="map-switch">
+					<input type="checkbox" checked="checked">
+				</div>
+            </div>
             <div class="span6 quizbody">
                 <div class="alert" style="display: none;" id="results-message"></div>
                 <div class="hero-unit">
@@ -71,6 +77,9 @@
             </div>
         </div>
 
+
+		<div class="row quizresults" id="results-map"></div>
+
 		<div class="row quizresults">
 			<table class="table">
 				<thead>
@@ -96,6 +105,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
     <script src="leaflet/leaflet.js" type="text/javascript"></script>
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="bootstrap/js/bootstrapSwitch.js" type="text/javascript"></script>
     <script src="whereisthenorthreally.js" type="text/javascript"></script>
 </body>
 </html>

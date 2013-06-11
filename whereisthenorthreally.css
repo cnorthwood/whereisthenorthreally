@@ -6,6 +6,7 @@
 }
 
 #map {
+    display: none;
     height: 450px;
 }
 
