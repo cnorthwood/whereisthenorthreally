@@ -162,9 +162,13 @@ function WhereIsTheNorthReally() {
     });
 
     $('.map-switch').on('switch-change', function() {
-        $('.quizbody').toggleClass('span12');
-        $('.quizbody').toggleClass('span6');
-        $('#map').toggle({ complete: function() { map.invalidateSize(); } });
+        $('#map').toggle({
+            complete: function() {
+                $('.quizbody').toggleClass('span12');
+                $('.quizbody').toggleClass('span6');
+                map.invalidateSize();
+            }
+        });
     });
     
     $.ajax({
