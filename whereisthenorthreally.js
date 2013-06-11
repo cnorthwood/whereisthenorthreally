@@ -166,6 +166,7 @@ function WhereIsTheNorthReally() {
                 $('.quizquestion').toggleClass('span12');
                 $('.quizquestion').toggleClass('span6');
                 map.invalidateSize();
+                map.setView(new L.LatLng(52, -1), 6);
         });
     });
     
