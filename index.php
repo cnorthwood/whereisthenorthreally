@@ -54,19 +54,22 @@
                                     <button class="btn-primary btn-large" type="submit" id="north">The North</button>
                                     <button class="btn-primary btn-large" type="submit" id="midlands">The Midlands</button>
                                     <button class="btn-primary btn-large" type="submit" id="south">The South</button>
+									<br>
                                     <button class="btn" type="submit" id="dunno">I don't know where that is</button>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label" for="input01">What's the first part of your postcode?</label>
+                                    <label class="control-label" for="postcode">What's the first part of your postcode?</label>
                                     <div class="controls">
                                         <input type="text" class="input-xlarge" id="postcode" placeholder="e.g., M5 or NW1">
                                         <span class="help-block">This helps to see if where you are in the country skews your perception of boundaries</span>
                                     </div>
                                 </div>
-								<div class="switch map-switch hidden-phone">
-									<label>Show Map</label>
-									<input type="checkbox" checked="checked">
-								</div>
+                                <div class="control-group">
+                                    <label class="control-label" for="map-toggle">Show/hide map</label>
+									<div class="switch map-switch hidden-phone">
+										<input type="checkbox" id="map-toggle">
+									</div>
+                                </div>
                             </fieldset>
                         </form>
                     </div>

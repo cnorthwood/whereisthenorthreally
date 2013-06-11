@@ -128,7 +128,9 @@ function WhereIsTheNorthReally() {
 
         if (submissions % 10 == 0) {
             $('.quizbody').hide();
-            $('.quizresults').fadeIn();
+            $('.quizresults').fadeIn(function() {
+                resultsMap.invalidateSize();
+            });
         }
     }
     
@@ -163,6 +165,7 @@ function WhereIsTheNorthReally() {
         $('.quizbody').toggleClass('span12');
         $('.quizbody').toggleClass('span6');
         $('#map').toggle();
+        map.invalidateSize();
     });
     
     $.ajax({
