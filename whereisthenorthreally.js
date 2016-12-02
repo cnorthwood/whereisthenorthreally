@@ -13,9 +13,10 @@ function WhereIsTheNorthReally() {
         touchZoom: false,
         dragging: false
     });
-    var mapTiles = new L.TileLayer('http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png', {
+    var mapTiles = new L.TileLayer('https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Data, imagery and map information provided by MapQuest, <a href="http://openstreetmap.org/">Open Street Map</a> and contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-        maxZoom: 18
+        maxZoom: 18,
+        accessToken: 'pk.eyJ1IjoiY25vcnRod29vZCIsImEiOiJjaXc4ZjF4dTAwMDJnMnZucnp1cnNkMHFlIn0.LpW9i6vsf4yL6yoA5F9wtA'
     });
     map.addLayer(mapTiles);
     map.setView(new L.LatLng(52, -1), 6);
