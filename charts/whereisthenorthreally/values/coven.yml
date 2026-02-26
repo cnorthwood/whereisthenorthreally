@@ -12,6 +12,9 @@ ingress:
     enabled: true
 
 mariadb-cluster:
+  mariadb:
+    metrics:
+      enabled: true
   physicalBackups:
     - name: nightly
       schedule:
