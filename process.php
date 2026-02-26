@@ -3,15 +3,15 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'true');
 
-require('config.inc.php');
-
 function verifyCsrf() {
     return !empty($_COOKIE['whereisthenorthcsrftoken']) && !empty($_POST['csrftoken']) && ($_COOKIE['whereisthenorthcsrftoken'] == $_POST['csrftoken']);
 }
 
 class WhereIsTheNorthReporter {
+    private $db;
+
     function __construct() {
-        $this->db = new mysqli(null, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+        $this->db = new mysqli($_SERVER['DB_HOST'], $_SERVER['DB_USERNAME'], $_SERVER['DB_PASSWORD'], $_SERVER['DB_DATABASE']);
     }
     
     public function getRandomLocation() {

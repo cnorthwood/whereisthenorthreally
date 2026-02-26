@@ -1,0 +1,12 @@
+ingress:
+  hostname: www.pling.org.uk
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: "kube-system-redirect-https@kubernetescrd"
+  tls:
+    - hosts:
+        - www.pling.org.uk
+        - pling.org.uk
+      secretName: www-pling-org-uk-tls
+  probe:
+    enabled: true

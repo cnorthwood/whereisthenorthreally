@@ -20,8 +20,7 @@
     <?php
         error_reporting(E_ALL);
         ini_set('display_errors', 'true');
-        require('config.inc.php');
-        $db = new mysqli(null, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+        $db = new mysqli($_SERVER['DB_HOST'], $_SERVER['DB_USERNAME'], $_SERVER['DB_PASSWORD'], $_SERVER['DB_DATABASE']);
         $handle = fopen("place_locations.csv", "r");
         while (($data = fgetcsv($handle)) !== FALSE) {
             $query = $db->prepare("INSERT INTO places(name,lat,lon) VALUES(?,?,?)");

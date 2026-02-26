@@ -1,0 +1,18 @@
+{{- if .Values.ingress.probe.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: Probe
+metadata:
+  name: {{ include "whereisthenorthreally.fullname" . }}
+  labels:
+    {{- include "whereisthenorthreally.labels" . | nindent 4 }}
+spec:
+  interval: 60s
+  module: http_2xx
+  prober:
+    path: /probe
+    url: {{ .Values.ingress.probe.blackboxExporterUrl }}
+  targets:
+    staticConfig:
+      static:
+        - "https://{{ .Values.ingress.hostname }}/whereisthenorthreally/"
+{{- end }}

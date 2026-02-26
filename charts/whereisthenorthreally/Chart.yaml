@@ -1,0 +1,10 @@
+apiVersion: v2
+name: whereisthenorthreally
+description: www.pling.org.uk
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+dependencies:
+  - name: mariadb-cluster
+    version: 25.10.4
+    repository: https://helm.mariadb.com/mariadb-operator
