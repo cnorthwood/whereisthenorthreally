@@ -24,7 +24,7 @@ mariadb-cluster:
           bucket: coven-backups
           prefix: mariadb/whereisthenorthreally
           region: europe-west2
-          endpoint: https://storage.googleapis.com
+          endpoint: storage.googleapis.com
           accessKeyIdSecretKeyRef:
             name: whereisthenorthreally-gcp-backups
             key: AWS_ACCESS_KEY_ID
