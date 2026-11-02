@@ -10,7 +10,7 @@ jobs:
       contents: read
     steps:
       - name: checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: set up Docker buildx
         uses: docker/setup-buildx-action@v3
@@ -28,7 +28,7 @@ jobs:
       contents: read
     steps:
       - name: checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: fetch dependencies
         run: |
