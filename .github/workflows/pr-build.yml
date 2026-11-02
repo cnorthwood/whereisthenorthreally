@@ -20,3 +20,23 @@ jobs:
         with:
           context: .
           push: false
+
+  helm:
+    name: Lint chart
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v6
+
+      - name: fetch dependencies
+        run: |
+          helm repo add mariadb-cluster https://helm.mariadb.com/mariadb-operator
+          helm dependency build
+        working-directory: ./charts/whereisthenorthreally/
+
+      - name: lint and render
+        run: |
+          helm lint ./charts/whereisthenorthreally/ -f ./charts/whereisthenorthreally/values/coven.yml
+          helm template whereisthenorthreally ./charts/whereisthenorthreally/ -f ./charts/whereisthenorthreally/values/coven.yml > /dev/null

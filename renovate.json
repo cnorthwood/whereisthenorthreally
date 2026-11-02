@@ -17,6 +17,13 @@
       "platformAutomerge": false
     },
     {
+      "matchManagers": ["helmv3"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    },
+    {
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "github-actions",
