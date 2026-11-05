@@ -74,6 +74,7 @@ mariadb-cluster:
     # Set explicitly so it can be updated: if left unset, the operator fills in its default
     # once when the database is created and never changes it again. Kept up to date by the
     # custom regex manager in renovate.json, which looks for the comment at the end of the line.
-    image: docker-registry1.mariadb.com/library/mariadb:11.8.5 # renovate: datasource=docker
+    # Uses Docker Hub because Renovate gets rate limited (429) by docker-registry1.mariadb.com.
+    image: mariadb:11.8.9 # renovate: datasource=docker
     updateStrategy:
       mariadbAutoUpgradeEnabled: true
