@@ -75,6 +75,6 @@ mariadb-cluster:
     # once when the database is created and never changes it again. Kept up to date by the
     # custom regex manager in renovate.json, which looks for the comment at the end of the line.
     # Uses Docker Hub because Renovate gets rate limited (429) by docker-registry1.mariadb.com.
-    image: mariadb:11.8.9 # renovate: datasource=docker
+    image: mariadb:11.8.9@sha256:c4124d1afa875e47f2892edf26b482fa54f796e2f342d3717a04ca091a22a9bd # renovate: datasource=docker
     updateStrategy:
       mariadbAutoUpgradeEnabled: true
