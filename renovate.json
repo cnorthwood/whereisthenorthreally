@@ -2,6 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "mode": "full",
+  "timezone": "Europe/London",
   "enabledManagers": ["dockerfile", "github-actions", "helmv3", "custom.regex"],
   "ignoreDeps": ["ghcr.io/cnorthwood/whereisthenorthreally"],
   "customManagers": [
@@ -35,9 +36,24 @@
       "platformAutomerge": false
     },
     {
-      "description": "Pin images found by the custom regex manager by digest. Not automerged: every change restarts the database.",
+      "description": "Pin images found by the custom regex manager by digest.",
       "matchManagers": ["custom.regex"],
       "pinDigests": true
+    },
+    {
+      "description": "MariaDB: LTS series only. From 12.3 onwards every .3 release is LTS; 11.8 is the last LTS from before that rule and can be removed once we're on 12.3.",
+      "matchPackageNames": ["mariadb"],
+      "allowedVersions": "/^(11\\.8|\\d+\\.3)\\./"
+    },
+    {
+      "description": "Automerge patch releases and image rebuilds within a MariaDB series, overnight. Each merge restarts the database, so keep it away from the 03:45 backup. Moving to a new series is a major update and is never automerged.",
+      "matchManagers": ["custom.regex"],
+      "matchPackageNames": ["mariadb"],
+      "matchUpdateTypes": ["patch", "digest", "pinDigest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false,
+      "automergeSchedule": ["* 1-2 * * *"]
     },
     {
       "matchManagers": ["github-actions"],
