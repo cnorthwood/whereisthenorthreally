@@ -2,8 +2,19 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "mode": "full",
-  "enabledManagers": ["dockerfile", "github-actions", "helmv3"],
+  "enabledManagers": ["dockerfile", "github-actions", "helmv3", "custom.regex"],
   "ignoreDeps": ["ghcr.io/cnorthwood/whereisthenorthreally"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Container images in Helm values given as a single string, marked with a '# renovate: datasource=docker' comment",
+      "managerFilePatterns": ["/(^|/)values\\.ya?ml$/"],
+      "matchStrings": [
+        "image:\\s*(?<depName>[^\\s:@]+):(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\s*#\\s*renovate:\\s*datasource=(?<datasource>\\S+)"
+      ],
+      "autoReplaceStringTemplate": "image: {{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}} # renovate: datasource={{{datasource}}}"
+    }
+  ],
   "packageRules": [
     {
       "matchManagers": ["dockerfile"],
@@ -22,6 +33,11 @@
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": false
+    },
+    {
+      "description": "Pin images found by the custom regex manager by digest. Not automerged: every change restarts the database.",
+      "matchManagers": ["custom.regex"],
+      "pinDigests": true
     },
     {
       "matchManagers": ["github-actions"],
