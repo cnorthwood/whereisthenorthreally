@@ -2,7 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "mode": "full",
-  "timezone": "Europe/London",
   "enabledManagers": ["dockerfile", "github-actions", "helmv3", "custom.regex"],
   "ignoreDeps": ["ghcr.io/cnorthwood/whereisthenorthreally"],
   "customManagers": [
@@ -46,14 +45,13 @@
       "allowedVersions": "/^(11\\.8|\\d+\\.3)\\./"
     },
     {
-      "description": "Automerge patch releases and image rebuilds within a MariaDB series, overnight. Each merge restarts the database, so keep it away from the 03:45 backup. Moving to a new series is a major update and is never automerged.",
+      "description": "Automerge patch releases and image rebuilds within a MariaDB series. Each merge restarts the database briefly. Moving to a new series is a major update and is never automerged.",
       "matchManagers": ["custom.regex"],
       "matchPackageNames": ["mariadb"],
       "matchUpdateTypes": ["patch", "digest", "pinDigest"],
       "automerge": true,
       "automergeType": "pr",
-      "platformAutomerge": false,
-      "automergeSchedule": ["* 1-2 * * *"]
+      "platformAutomerge": false
     },
     {
       "matchManagers": ["github-actions"],
