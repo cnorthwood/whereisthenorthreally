@@ -1,4 +1,4 @@
-FROM php:8.5-apache@sha256:0a785eab8b7eb4836f9c6093771c8ea15ff8ba7269444f3da70a1d33d15fe664
+FROM php:8.6-apache@sha256:0b06b358a7d59cca80e0528aad0e49b43208c3a74754ffcd8a12d7727058511e
 
 RUN docker-php-ext-configure mysqli
 RUN docker-php-ext-install mysqli
