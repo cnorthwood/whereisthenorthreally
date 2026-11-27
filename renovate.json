@@ -54,6 +54,14 @@
       "platformAutomerge": false
     },
     {
+      "description": "Automerge mysqld-exporter updates, including minor releases as it's 0.x. Each merge restarts the database briefly, as the exporter runs as a sidecar. A major release is never automerged.",
+      "matchPackageNames": ["prom/mysqld-exporter"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    },
+    {
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "github-actions",
