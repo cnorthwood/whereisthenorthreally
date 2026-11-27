@@ -78,3 +78,8 @@ mariadb-cluster:
     image: mariadb:12.3.3@sha256:4aaf88b3106382c8c18e49f0cec60267be618fc22f858c4503afb2a2555afed3 # renovate: datasource=docker
     updateStrategy:
       mariadbAutoUpgradeEnabled: true
+    # Set explicitly for the same reason as the image above: the operator fills in its default
+    # exporter once and never changes it again. Renovate updates it the same way.
+    metrics:
+      exporter:
+        image: prom/mysqld-exporter:v0.21.0@sha256:afad0c59a154fea24ca5ea0e6f95f2b0b168601b111266963dc8a347715b5318 # renovate: datasource=docker
